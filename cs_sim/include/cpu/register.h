@@ -1,6 +1,10 @@
+#ifndef REGISTER_GUARD
+#define REGISTER_GUARD
+
 #include <stdint.h>
 
-typedef struct RegisterSet {
+// 通用寄存器
+typedef struct {
 #define XX(name_64, name_32, name_16, name_8l, name_8h) \
   union {                                     \
     uint64_t name_64;                         \
@@ -37,5 +41,27 @@ typedef struct RegisterSet {
   XX(r14, r14d, r14w, r14b);
   XX(r15, r15d, r15w, r15b);
 #undef XX
-}RegisterSet;
+} cpu_general_reg_t;
 
+cpu_general_reg_t cpu_general_reg;
+
+// 状态寄存器
+typedef struct {
+  uint64_t eflags;
+  bool ZF;
+  bool CF;
+  bool SF;
+  bool OF;
+} cpu_state_reg_t;
+
+cpu_state_reg_t cpu_state_reg;
+
+// 程序计数器PC
+typedef union {
+  uint64_t rip;
+  uint32_t eip;
+} PC_t;
+
+PC_t PC;
+
+#endif
