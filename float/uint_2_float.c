@@ -52,6 +52,6 @@ int main() {
     printf("请输入要转换成浮点数的数：\n");
     scanf("%u", &u);
     uint32_t uf = uint2float(u);
-    printf("转换结果为：0x%x \n", uf);
+    printf("转换结果为:0x%x \n", uf);
     return 0;
 }
